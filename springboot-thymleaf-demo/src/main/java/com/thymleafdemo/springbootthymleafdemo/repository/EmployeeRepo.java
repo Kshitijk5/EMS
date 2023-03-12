@@ -9,4 +9,6 @@ import com.thymleafdemo.springbootthymleafdemo.entities.Employee;
 public interface EmployeeRepo extends JpaRepository<Employee,String> {
     
     Optional<Employee> findByEmail(String email);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }

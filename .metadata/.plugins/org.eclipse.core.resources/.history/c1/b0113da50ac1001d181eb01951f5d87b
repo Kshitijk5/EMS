@@ -1,0 +1,45 @@
+package com.thymleafdemo.springbootthymleafdemo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.thymleafdemo.springbootthymleafdemo.entities.Employee;
+import com.thymleafdemo.springbootthymleafdemo.service.EmployeeService;
+
+@org.springframework.stereotype.Controller
+public class AuthController {
+	
+	@Autowired
+	private EmployeeService employeeService;
+	
+	@GetMapping("/login")	
+	public String login() {
+		return "login-page";
+	}
+	
+	@GetMapping("/main")	
+	public String mainPage() {
+		return "main-page";
+	}
+	
+	@GetMapping("/register")	
+	public String registerPage(Model model) {
+		
+		model.addAttribute("employee",new Employee());
+		return "register-page";
+	}
+	
+	@PostMapping("/registerprocess")	
+	public String registerProcessor(Employee responseEmployee) {
+		System.out.println("Inside employee");
+		employeeService.create(responseEmployee);
+		System.out.println("Saved");
+		return "redirect:/main";
+	}
+	
+	
+
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,8 @@
 				<div class="card shadow-lg">
 					<div class="card-body p-5">
 						<h3 class="mb-5">Login</h3>
+						<div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username and password.</div>
+						<div th:if="${param.logout}" class="alert alert-success" role="alert">You have been logged out.</div>
 						<form th:action="@{/processor}" method="POST">
 							<div class="mb-3">
 								<label for="username" class="form-label">Username</label> <input
@@ -32,6 +34,11 @@
 							</div>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
+						<div class="mt-2">
+						<form action="#" th:action="@{/register}" method="get">
+						     <input type="submit" value="Register" class="btn btn-primary ">
+						</form>
+						</div>
 					</div>
 				</div>
 			</div>

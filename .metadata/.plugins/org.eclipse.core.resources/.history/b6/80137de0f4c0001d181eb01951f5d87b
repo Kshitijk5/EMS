@@ -1,0 +1,5 @@
+package com.thymleafdemo.springbootthymleafdemo.globalexception;
+
+public class GlobalException {
+
+}

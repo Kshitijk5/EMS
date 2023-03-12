@@ -1,0 +1,5 @@
+package com.thymleafdemo.springbootthymleafdemo.entities;
+
+public class Roles {
+
+}
