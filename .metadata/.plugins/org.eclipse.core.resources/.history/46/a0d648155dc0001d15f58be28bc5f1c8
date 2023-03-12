@@ -1,0 +1,15 @@
+package com.thymleafdemo.springbootthymleafdemo.service;
+
+import java.util.List;
+import com.thymleafdemo.springbootthymleafdemo.entities.*;
+public interface EmployeeService {
+    
+    List<Employee> getAllEmployees(); 
+
+    Employee getByID(int id);
+    
+    Employee getByEmailId(String email);
+
+
+    
+}

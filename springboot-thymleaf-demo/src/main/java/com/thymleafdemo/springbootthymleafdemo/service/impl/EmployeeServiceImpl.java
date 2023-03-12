@@ -1,0 +1,69 @@
+package com.thymleafdemo.springbootthymleafdemo.service.impl;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.thymleafdemo.springbootthymleafdemo.entities.Employee;
+import com.thymleafdemo.springbootthymleafdemo.globalexception.ResourceNotFoundException;
+import com.thymleafdemo.springbootthymleafdemo.repository.EmployeeRepo;
+import com.thymleafdemo.springbootthymleafdemo.service.EmployeeService;
+
+@Service
+public class EmployeeServiceImpl  implements EmployeeService{
+
+    @Autowired
+    private EmployeeRepo employeeRepo;
+
+    @Override
+    public List<Employee> getAllEmployees() {
+       return employeeRepo.findAll();
+    }
+
+   
+
+    @Override
+    public Employee getByEmailId(String email) {
+        Employee employee = employeeRepo.findByEmail(email).orElseThrow(
+        		()-> new ResourceNotFoundException("Employee","email", email)
+        		);
+        
+        return employee;
+    }
+
+   
+
+
+
+	@Override
+	public Employee getByID(String id) {
+		 Employee employee = employeeRepo.findById(id).orElseThrow(
+	        		()-> new ResourceNotFoundException("Employee","ID", id)
+	        		);
+	        
+	        return employee;
+	}
+
+
+
+	@Override
+	public Employee create(Employee employee) {
+		String randomID= UUID.randomUUID().toString();
+		employee.setId(randomID);
+		return employeeRepo.save(employee);
+	}
+
+
+
+	@Override
+	public String deleteByID(String id) {
+		Employee employee = getByID(id);
+		employeeRepo.delete(employee);
+		return "EMployee with ID"+id+" deleted";
+	}
+
+    
+   
+}

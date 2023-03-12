@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;springboot-thymleaf-demo/src/main/resources/templates/login.html&apos; to &apos;login-page.html&apos;" description="Rename resource &apos;login.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/login.html" name="login-page.html" stamp="1678579260593" updateReferences="true"/>
+</session>

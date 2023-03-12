@@ -1,0 +1,5 @@
+package com.thymleafdemo.springbootthymleafdemo.controller;
+
+public class AuthController {
+
+}
