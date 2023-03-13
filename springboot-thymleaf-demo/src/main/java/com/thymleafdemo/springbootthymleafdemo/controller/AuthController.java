@@ -3,7 +3,10 @@ package com.thymleafdemo.springbootthymleafdemo.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,9 +18,8 @@ import com.thymleafdemo.springbootthymleafdemo.entities.Employee;
 import com.thymleafdemo.springbootthymleafdemo.entities.Roles;
 import com.thymleafdemo.springbootthymleafdemo.repository.EmployeeRepo;
 import com.thymleafdemo.springbootthymleafdemo.repository.RoleRepo;
+import com.thymleafdemo.springbootthymleafdemo.securityconfig.CustomUserService;
 import com.thymleafdemo.springbootthymleafdemo.service.EmployeeService;
-
-import javax.validation.Valid;
 
 @org.springframework.stereotype.Controller
 public class AuthController {
@@ -76,5 +78,17 @@ public class AuthController {
 		}
 
 	}
+//	@GetMapping("/account")
+//    public String viewUserAccountForm(
+//            @AuthenticationPrincipal CustomUserService userDetails,
+//            Model model) {
+//        String userEmail = userDetails.getUsername();
+//        User user = service.getByEmail(userEmail);
+//         
+//        model.addAttribute("user", user);
+//        model.addAttribute("pageTitle", "Account Details");
+//         
+//        return "users/account_form";
+//    }
 
 }

@@ -1,0 +1,14 @@
+package com.thymleafdemo.springbootthymleafdemo.securityconfig;
+
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+public class CustomUserDetails extends User {
+	
+	private String email;
+	private String password;
+
+	
+}

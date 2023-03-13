@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class Controller {
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeService.create(employee);
 	}
-	
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/id/{id}")
 	public Employee getById(@PathVariable("id") String id) {
 		return employeeService.getByID(id);

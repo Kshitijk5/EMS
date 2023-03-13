@@ -19,17 +19,21 @@ import com.thymleafdemo.springbootthymleafdemo.repository.EmployeeRepo;
 
 @Service
 public class CustomUserService implements UserDetailsService {
-     
+
 	@Autowired
 	private EmployeeRepo employeeRepo;
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		  
-		        Employee employee = employeeRepo.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("No user with Username"+username+" existss"));
 
-		        Set<GrantedAuthority> roles = employee.getRoles().stream().map(role-> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-		       return new User(employee.getEmail(),employee.getPassword(),roles);
+	@Override
+	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+
+		Employee employee = employeeRepo.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail).orElseThrow(
+				() -> new UsernameNotFoundException("No user with Username" + usernameOrEmail + " exists"));
+		Set<GrantedAuthority> roles = employee.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
+
+		return new User(employee.getEmail(), employee.getPassword(), roles);
+
+		// return new CustomUserDetails(employee);
 	}
 
 }
