@@ -17,7 +17,7 @@ import com.thymleafdemo.springbootthymleafdemo.repository.EmployeeRepo;
 import com.thymleafdemo.springbootthymleafdemo.repository.RoleRepo;
 import com.thymleafdemo.springbootthymleafdemo.service.EmployeeService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @org.springframework.stereotype.Controller
 public class AuthController {

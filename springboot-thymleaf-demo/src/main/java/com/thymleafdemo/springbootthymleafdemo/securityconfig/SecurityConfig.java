@@ -5,20 +5,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableMethodSecurity
 public class SecurityConfig {
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private UserDetailsService detailsService;
      
@@ -27,10 +23,10 @@ public class SecurityConfig {
 		http
 		    
 		    .authorizeHttpRequests(authorize->authorize
-		    		.requestMatchers("/login").permitAll()
-		    		.requestMatchers("/register").permitAll()
-		    		.requestMatchers("/registerprocess").permitAll()
-        			.requestMatchers("/main").hasAnyRole("ADMIN","USER","LEADER")
+		    		.antMatchers("/login").permitAll()
+		    		.antMatchers("/register").permitAll()
+		    		.antMatchers("/registerprocess").permitAll()
+        			.antMatchers("/main").hasAnyRole("ADMIN","USER","LEADER")
 		    		.anyRequest().authenticated()
 		    		
 		    		)
@@ -42,16 +38,18 @@ public class SecurityConfig {
 			
 			)
 		.logout().permitAll();
-  
+        
 		return http.build();
 		
 	}
 	
-	@Bean public PasswordEncoder passwordEncoder() {
+	@Bean
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10);
 	}
 	
-	@Bean public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return  authenticationConfiguration.getAuthenticationManager();
 	}
 //	---- IN MEMORY AUTHENTICATION
